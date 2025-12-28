@@ -1,5 +1,9 @@
 package com.examly.springapp.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,9 +17,31 @@ public class Employee {
     private String name;
     private String email;
     private String department;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AttendanceLog> attendanceList;
     
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AttendanceRecord> attendanceRecords;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<DailyAttendanceSummary> dailyAttendanceSummaries;
+
     public Employee() {}
-    
+
+    public List<DailyAttendanceSummary> getDailyAttendanceSummaries() {
+        return dailyAttendanceSummaries;
+    }
+
+
+    public void setDailyAttendanceSummaries(List<DailyAttendanceSummary> dailyAttendanceSummaries) {
+        this.dailyAttendanceSummaries = dailyAttendanceSummaries;
+    }
+
+
     public Long getEmployeeId() { return employeeId; }
     public void setEmployeeId(Long employeeId) { this.employeeId = employeeId; }
     
