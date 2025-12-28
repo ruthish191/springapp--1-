@@ -25,7 +25,7 @@ public class Employee {
     @JsonIgnore
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AttendanceRecord> attendanceRecords;
-    
+
     @JsonIgnore
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<DailyAttendanceSummary> dailyAttendanceSummaries;
